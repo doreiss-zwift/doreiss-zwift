@@ -1,6 +1,3 @@
-import numpy as np
-from sys import stdin
-
 N = 5
 
 winners = [set([0, 1, 2, 3, 4]),    set([5, 6, 7, 8, 9]),    set([10, 11, 12, 13, 14]), set([15, 16, 17, 18, 19]), set([20, 21, 22, 23, 24]),
