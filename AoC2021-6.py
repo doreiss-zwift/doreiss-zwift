@@ -22,7 +22,7 @@ while True:
     if(elapsed_days > total_days):
         print(result)
         break
-    for key in sorted(fish_map) :
+    for key in fish_map :
         if key == min_fish_value :
             tmp[8] += fish_map[min_fish_value]
             tmp[6] += fish_map[min_fish_value]
