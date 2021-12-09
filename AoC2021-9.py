@@ -1,5 +1,3 @@
-import math
-
 def process_input(input_path):
     f = open(input_path)
     arr = []
