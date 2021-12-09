@@ -16,26 +16,12 @@
 # set(9) is the set X containing 6 chars for which set(4) intersect X == set(4)
 # set(0) is the other set containing 6 chars
 #
-# {e} is set(8) less set(9)
-# {a} is set(7) less set(1)
-# {g} is set(8) less set(4) less {a} less {e} 
-# {f} is set(6) intersect set(1)
-# {c} is set(1) less {f}
-# So we know all the signal maps except for {b} and {d}.
-#
-# From the digits containing 5 characters we can identify:
-# set(2) and set(3) contains {d} but not {b}
-# set(5)            contains {b}     and {d}
-#
-# If we query these sets for the first unknown char and we get 2 hits, then we know its a {d}.
-# On the other hand if we get 1 hits, we know its a {b}.
-# We can then construct the remaining sets explictly.
-# set(2) = {a, c, d, e, g}
-# set(3) = {a, c, d, f, g}
-# set(5) = {a, b, d, f, g}
+# Then of the remaining sets of 5 characters:
+# set(3) is the set X containing 5 characters for which X intersect set(1) == set(1)
+# set(2) is the set X containing 5 characters which is not set(3) for which X intersect set(9)  == X
+# set(5) is the other set containing 5 characters.
 
 def deduce_digits(digit_option, digits_output):
-    sigA, sigB, sigC, sigD, sigE, sigF, sigG = set(), set(), set(), set(), set(), set(), set()
     set0, set1, set2, set3, set4, set5, set6, set7, set8, set9 = set(), set(), set(), set(), set(), set(), set(), set(), set(), set()
     fiveCharSets = []
     sixCharSets = []
@@ -55,34 +41,21 @@ def deduce_digits(digit_option, digits_output):
             set8 = digit
 
     for sixCharSet in sixCharSets:
-        if sixCharSet.intersection(set4) == set4:
+        if sixCharSet & set4 == set4:
             set9 = sixCharSet
-        elif sixCharSet.intersection(set7) != set7:
+        elif sixCharSet & set7 != set7:
             set6 = sixCharSet
         else:
             set0 = sixCharSet
 
-    sigE = set8 - set9
-    sigA = set7 - set1
-    sigG = set8 - set4 - sigA - sigE
-    sigF = set6 & set1
-    sigC = set1 - sigF
-    knownChars = sigA | sigC | sigE | sigF | sigG
-    unknownChars = set8 - knownChars
-    for char in unknownChars:
-        hits = 0
-        for fiveCharSet in fiveCharSets:
-            if char in fiveCharSet:
-                hits += 1
-        if hits == 1:
-            sigB = set(char)
+    for fiveCharSet in fiveCharSets:
+        if fiveCharSet & set1 == set1:
+            set3 = fiveCharSet
+        elif fiveCharSet & set9 == fiveCharSet:
+            set2 = fiveCharSet
         else:
-            sigD = set(char)
-    
-    set2 = sigA | sigC | sigD | sigE | sigG
-    set3 = sigA | sigC | sigD | sigF | sigG
-    set5 = sigA | sigB | sigD | sigF | sigG
-
+            set5 = fiveCharSet
+                
     deduced_digits = [set0, set1, set2, set3, set4, set5, set6, set7, set8, set9]
     number_str = ""
     for output_digit in digits_output:
