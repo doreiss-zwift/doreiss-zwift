@@ -18,8 +18,8 @@
 #
 # Then of the remaining sets of 5 characters:
 # set(3) is the set X containing 5 characters for which X intersect set(1) == set(1)
-# set(2) is the set X containing 5 characters which is not set(3) for which X intersect set(9)  == X
-# set(5) is the other set containing 5 characters.
+# set(5) is the set X containing 5 characters which is not set(3) for which X intersect set(9)  == X
+# set(2) is the other set containing 5 characters.
 
 def deduce_digits(digit_option, digits_output):
     set0, set1, set2, set3, set4, set5, set6, set7, set8, set9 = set(), set(), set(), set(), set(), set(), set(), set(), set(), set()
@@ -52,9 +52,9 @@ def deduce_digits(digit_option, digits_output):
         if fiveCharSet & set1 == set1:
             set3 = fiveCharSet
         elif fiveCharSet & set9 == fiveCharSet:
-            set2 = fiveCharSet
-        else:
             set5 = fiveCharSet
+        else:
+            set2 = fiveCharSet
                 
     deduced_digits = [set0, set1, set2, set3, set4, set5, set6, set7, set8, set9]
     number_str = ""
