@@ -65,7 +65,6 @@ def pair_counts_to_char_counts(pair_counts, pair_list, char_idx_map, first_elem,
 if __name__ == '__main__':
     pair_counts, update_pair_count_arr, pair_list, pair_idx_map, char_list, char_idx_map, first_elem, last_elem = process_input('input.txt')
     steps = 40
-    for step in range(steps):
-        pair_counts = update_pair_count_arr @ pair_counts
+    pair_counts = np.linalg.matrix_power(update_pair_count_arr, steps) @ pair_counts
     char_counts = pair_counts_to_char_counts(pair_counts, pair_list, char_idx_map, first_elem, last_elem)
     print(np.max(char_counts) - np.min(char_counts))
