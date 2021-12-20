@@ -8,9 +8,7 @@ def correspond(s1, s2):
                if len(set([D(r1, r) for r in s1]) & set([D(r2, r) for r in s2])) >= 12]
 
     if len(matching_beacons) == 0:
-        return False, (0,0)
-
-    
+        return False, (0,0,0)
 
     x = np.array([[1, 0, 0], [0, 0, -1], [0, 1, 0]])
     y = np.array([[0, 0, 1], [0, 1, 0], [-1, 0, 0]])
