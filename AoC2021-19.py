@@ -58,10 +58,10 @@ if __name__ == '__main__':
             found, found_scanner_position = correspond(found_scanner, scanner)
             if found:
                 found_scanner_positions.append(found_scanner_position)
-                found_scanners.append(found_scanner)
+                found_scanners.append(scanner)
                 break
         if not found:
-            scanners_to_search.append(found_scanner)
+            scanners_to_search.append(scanner)
 
     print(max(D(s1, s2)
       for s1 in found_scanner_positions for s2 in found_scanner_positions))
