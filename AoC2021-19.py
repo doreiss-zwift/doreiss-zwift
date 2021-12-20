@@ -52,7 +52,7 @@ if __name__ == '__main__':
     found_scanner_positions = [(0, 0, 0)]
 
     while len(scanners_to_search):
-        scanner = scanners_to_search.pop()
+        scanner = scanners_to_search.popleft()
         found = False
         for found_scanner in found_scanners:
             found, found_scanner_position = correspond(found_scanner, scanner)
